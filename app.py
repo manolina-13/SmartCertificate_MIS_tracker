@@ -91,11 +91,11 @@ if page == "📊 Dashboard":
         # Color rows based on urgency
         def highlight_due(row):
             if row["Days_Left"] <= ALERT_DAYS:
-                return ['background-color: #ffcccc'] * len(row)
+                return ['background-color: #ffcccc; color: black;'] * len(row)
             elif row["Days_Left"] <= 30:
-                return ['background-color: #fff3cd'] * len(row)
+                return ['background-color: #fff3cd; color: black;'] * len(row)
             else:
-                return ['background-color: #d4edda'] * len(row)
+                return ['background-color: #d4edda; color: black;'] * len(row)
         
         st.dataframe(
             display_df.style.apply(highlight_due, axis=1),
