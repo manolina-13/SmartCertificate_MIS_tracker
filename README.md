@@ -6,7 +6,7 @@ A Streamlit app for tracking MIS certificates with Firebase Realtime Database.
 
 - Add MIS certificates
 - View all certificates
-- Highlight certificates nearing maturity (`Days_Left <= 10`)
+- Highlight certificates nearing maturity (`Days_Left <= 20`)
 - Edit and delete records
 
 ## Tech Stack
