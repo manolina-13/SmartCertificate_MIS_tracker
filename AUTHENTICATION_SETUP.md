@@ -74,9 +74,17 @@ Find this line:
 api_key = "YOUR_FIREBASE_API_KEY"
 ```
 
-Replace `YOUR_FIREBASE_API_KEY` with your actual API Key. Example:
+**Update secrets.toml:**
+Find this line:
 ```toml
-api_key = "AIzaSyDx_1234567890abcdefghijklmnopqrst"
+api_key = "YOUR_FIREBASE_API_KEY"
+```
+
+Replace `YOUR_FIREBASE_API_KEY` with your actual API Key (without the quotes).
+
+**Example format (with fake key):**
+```toml
+api_key = "AIzaSy_XXXX_YOUR_ACTUAL_KEY_HERE_XXXX"
 ```
 
 ### Step 3: Enable Firebase Authentication
