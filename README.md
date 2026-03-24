@@ -4,19 +4,19 @@ A Streamlit app for tracking MIS certificates with Firebase authentication and u
 
 ## Features
 
-✨ **Authentication & Security**
+**Authentication & Security**
 - User registration and login with Firebase Authentication
 - Secure session management with logout functionality
 - Each user can only view and manage their own certificates
 
-📊 **Certificate Management**
+**Certificate Management**
 - Add new MIS certificates
 - View all your certificates in a dashboard
 - Edit certificate details
 - Delete certificates
 - Search and sort certificates by number, date, or amount
 
-🔔 **Smart Alerts**
+ **Smart Alerts**
 - Highlight certificates nearing maturity (20 days or less)
 - Visual color-coded urgency indicators
 - CSV export for certificate records
@@ -58,7 +58,7 @@ A Streamlit app for tracking MIS certificates with Firebase authentication and u
 4. **Configure Firebase Secrets**
    - Create `.streamlit/secrets.toml` in your project root
    - Add your Firebase credentials (see Configuration section below)
-   - **⚠️ Never commit `secrets.toml` to GitHub** (use `.gitignore`)
+   - ** Never commit `secrets.toml` to GitHub** (use `.gitignore`)
 
 5. **Run the app**
    ```bash
@@ -147,7 +147,7 @@ mis_frontend/
 
 ## Security Notes
 
-🔒 **Best Practices**
+**Best Practices**
 - Never commit `secrets.toml` to GitHub
 - Use `.gitignore` to exclude sensitive files
 - Rotate Firebase keys regularly in production
@@ -185,33 +185,23 @@ users/
 
 For detailed authentication setup, see [AUTHENTICATION_SETUP.md](AUTHENTICATION_SETUP.md)
 
-## Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
-
 ## Support
 
 For issues or questions:
 1. Check the [AUTHENTICATION_SETUP.md](AUTHENTICATION_SETUP.md) guide
 2. Review Firebase documentation
-3. Open an issue in the repository
-auth_uri = "https://accounts.google.com/o/oauth2/auth"
-token_uri = "https://oauth2.googleapis.com/token"
-auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs"
-client_x509_cert_url = "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-xxxxx%40your-project-id.iam.gserviceaccount.com"
-```
 
 ## Security Notes
 
 - Never commit real `secrets.toml` or `.streamlit/secrets.toml` to GitHub.
 - Rotate any previously exposed Firebase private keys.
 - Keep Firebase Realtime Database rules appropriately locked down.
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+
+## Contact
+
+Manolina Das - [GitHub Profile](https://github.com/manolina-13)
+
