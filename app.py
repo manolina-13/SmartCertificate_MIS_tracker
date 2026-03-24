@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime as dt
+import pytz
 from utils import (
     add_certificate, get_certificates, delete_certificate, 
     edit_certificate, signup_user, verify_login, logout_user
@@ -11,8 +12,9 @@ ALERT_DAYS = 20
 
 # ===== HELPER FUNCTION FOR DYNAMIC DAYS CALCULATION =====
 def calculate_days_left(maturity_date_df):
-    """Calculate days left based on TODAY's date (dynamic)"""
-    today = dt.date.today()
+    """Calculate days left based on TODAY's date in IST (Indian Standard Time)"""
+    ist = pytz.timezone('Asia/Kolkata')
+    today = dt.datetime.now(ist).date()
     today_ts = pd.Timestamp(today)
     days_left = (maturity_date_df.dt.normalize() - today_ts).dt.days
     time_left = days_left.apply(
