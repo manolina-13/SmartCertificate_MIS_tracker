@@ -9,7 +9,16 @@ from utils import (
 st.set_page_config(page_title="MIS Certificate Tracker", layout="wide")
 ALERT_DAYS = 20
 
-# ===== SESSION STATE INITIALIZATION =====
+# ===== HELPER FUNCTION FOR DYNAMIC DAYS CALCULATION =====
+def calculate_days_left(maturity_date_df):
+    """Calculate days left based on TODAY's date (dynamic)"""
+    today = dt.date.today()
+    today_ts = pd.Timestamp(today)
+    days_left = (maturity_date_df.dt.normalize() - today_ts).dt.days
+    time_left = days_left.apply(
+        lambda d: "Matured" if d < 0 else ("Today" if d == 0 else f"{d} day(s)")
+    )
+    return days_left, time_left, today
 if "user_id" not in st.session_state:
     st.session_state.user_id = None
 if "user_email" not in st.session_state:
@@ -113,6 +122,16 @@ def show_main_app():
         st.markdown(f"👤 Logged in as: **{st.session_state.user_email}**")
         st.divider()
         
+        # Refresh button to update days dynamically
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("🔄 Refresh Data", use_container_width=True):
+                st.rerun()
+        with col2:
+            st.write(f"*Last: {dt.datetime.now().strftime('%H:%M:%S')}*")
+        
+        st.divider()
+        
         st.header("Navigation")
         page = st.radio("Select Action", ["📊 Dashboard", "➕ Add Certificate", "✏️ Manage Certificates"])
         
@@ -123,11 +142,10 @@ def show_main_app():
         
         if not df.empty:
             df["Maturity_Date"] = pd.to_datetime(df["Maturity_Date"])
-            today_ts = pd.Timestamp(dt.date.today())
-            df["Days_Left"] = (df["Maturity_Date"].dt.normalize() - today_ts).dt.days
-            df["Time_Left"] = df["Days_Left"].apply(
-                lambda d: "Matured" if d < 0 else ("Today" if d == 0 else f"{d} day(s)")
-            )
+            df["Days_Left"], df["Time_Left"], today = calculate_days_left(df["Maturity_Date"])
+            
+            # Display today's date for reference
+            st.caption(f"📅 Calculated for: **{today.strftime('%B %d, %Y')}**")
             
             # Summary stats
             due = df[df["Days_Left"] <= ALERT_DAYS]
@@ -168,14 +186,12 @@ def show_main_app():
     # ===== MAIN AREA =====
     if page == "📊 Dashboard":
         st.subheader("Certificate Tracker Dashboard")
+        st.info("💡 **Days Left** updates dynamically based on today's date. Click the 🔄 Refresh Data button to update.")
         
         if not df.empty:
             df["Maturity_Date"] = pd.to_datetime(df["Maturity_Date"])
-            today_ts = pd.Timestamp(dt.date.today())
-            df["Days_Left"] = (df["Maturity_Date"].dt.normalize() - today_ts).dt.days
-            df["Time_Left"] = df["Days_Left"].apply(
-                lambda d: "Matured" if d < 0 else ("Today" if d == 0 else f"{d} day(s)")
-            )
+            df["Days_Left"], df["Time_Left"], today = calculate_days_left(df["Maturity_Date"])
+            st.caption(f"📅 Calculated for: **{today.strftime('%B %d, %Y')}**")
             
             # Alert banner
             due = df[df["Days_Left"] <= ALERT_DAYS]
