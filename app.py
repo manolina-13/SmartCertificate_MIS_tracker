@@ -333,11 +333,8 @@ else:
     # User is not logged in - show auth pages
     st.set_page_config(page_title="MIS Certificate Tracker - Login", layout="centered")
     
-    col1, col2 = st.columns([1, 3])
-    with col1:
-        st.title("📜")
-    with col2:
-        st.title("MIS Certificate Tracker")
+    # Center the title and icon
+    st.markdown("<h1 style='text-align: center;'>📜 MIS Certificate Tracker</h1>", unsafe_allow_html=True)
     
     st.divider()
     
