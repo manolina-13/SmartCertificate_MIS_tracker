@@ -130,7 +130,8 @@ def show_main_app():
             if st.button("🔄 Refresh Data", use_container_width=True):
                 st.rerun()
         with col2:
-            st.write(f"*Last: {dt.datetime.now().strftime('%H:%M:%S')}*")
+            ist = pytz.timezone('Asia/Kolkata')
+            st.write(f"*Last: {dt.datetime.now(ist).strftime('%H:%M:%S')}*")
         
         st.divider()
         
